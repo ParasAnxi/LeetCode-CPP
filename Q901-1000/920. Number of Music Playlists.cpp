@@ -35,7 +35,7 @@ public:
         }
 
         return dp[goal % 2][n];
-    }
+    
     int numMusicPlaylists(int n, int goal, int k)
     {
 

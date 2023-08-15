@@ -10,31 +10,31 @@
  */
 class Solution
 {
-public
-    ListNode partition(ListNode head, int x)
+public:
+    ListNode *partition(ListNode *head, int x)
     {
-        ListNode ans = new ListNode(0);
-        ListNode smaller = ans;
-        ListNode greater = new ListNode(0);
-        ListNode great = greater;
-        while (head != null)
+        ListNode *curr = head;
+        ListNode *l = new ListNode(0);
+        ListNode *c = l;
+        while (curr != NULL)
         {
-            int val = head.val;
-            ListNode temp = new ListNode(val);
-            if (val >= x)
+            if (curr->val < x)
             {
-                greater.next = temp;
-                greater = temp;
+                c->next = new ListNode(curr->val);
+                c = c->next;
             }
-            else
-            {
-                smaller.next = temp;
-                smaller = temp;
-            }
-            head = head.next;
+            curr = curr->next;
         }
-        smaller.next = great.next;
-        greater.next = null;
-        return ans.next;
+        curr = head;
+        while (curr != NULL)
+        {
+            if (curr->val >= x)
+            {
+                c->next = new ListNode(curr->val);
+                c = c->next;
+            }
+            curr = curr->next;
+        }
+        return l->next;
     }
 };

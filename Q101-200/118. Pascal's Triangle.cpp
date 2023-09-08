@@ -37,3 +37,30 @@ public:
         return ans;
     }
 };
+
+/*
+class Solution
+{
+public:
+    vector<vector<int>> generate(int n)
+    {
+        vector<int> vect;
+        vector<vector<int>> a;
+        vect.push_back(1);
+        a.push_back(vect);
+        for (int i = 1; i < n; i++)
+        {
+            vector<int> vect;
+            vect.push_back(1);
+            for (int j = i - 1; j > 0; j--)
+            {
+                int s = (a[i - 1][j] + a[i - 1][j - 1]);
+                vect.push_back(s);
+            }
+            vect.push_back(1);
+            a.push_back(vect);
+        }
+        return a;
+    }
+};
+*/

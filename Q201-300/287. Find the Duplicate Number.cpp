@@ -3,21 +3,24 @@ class Solution
 public:
     int findDuplicate(vector<int> &nums)
     {
-        int s = 1, e = nums.size() - 1, c;
 
-        while (s <= e)
+        int fast = nums[0];
+        int slow = nums[0];
+
+        do
         {
-            int mid = s + (e - s) / 2;
-            c = 0;
-            for (int n : nums)
-            {
-                ++c;
-            }
-            if (c <= mid)
-                s = mid + 1;
-            else
-                e = mid - 1;
+            fast = nums[nums[fast]];
+            slow = nums[slow];
+        } while (fast != slow);
+
+        fast = nums[0];
+
+        while (fast != slow)
+        {
+            fast = nums[fast];
+            slow = nums[slow];
         }
-        return s;
+
+        return slow;
     }
 };

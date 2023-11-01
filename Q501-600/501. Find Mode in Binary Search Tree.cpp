@@ -12,19 +12,19 @@
 class Solution
 {
 public:
-    void inorder(TreeNode *root, vector<int> &inorder)
+    void inorderTra(TreeNode *root, vector<int> &inorder)
     {
         if (root != NULL)
         {
-            inorder(root->left, inorder);
+            inorderTra(root->left, inorder);
             inorder.push_back(root->val);
-            inordrer(root->right, inorder);
+            inorderTra(root->right, inorder);
         }
     }
     vector<int> findMode(TreeNode *root)
     {
         vector<int> inorder;
-        inor(root, inorder);
+        inorderTra(root, inorder);
         unordered_map<int, int> mp;
         for (int i = 0; i < inorder.size(); i++)
         {

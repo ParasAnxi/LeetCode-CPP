@@ -3,7 +3,7 @@ class Solution
 public:
     vector<string> buildArray(vector<int> &target, int n)
     {
-        ector<string> ans;
+        vector<string> ans;
         unordered_map<int, int> mp;
         vector<int> temp;
         for (auto it : target)

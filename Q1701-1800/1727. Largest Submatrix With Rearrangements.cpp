@@ -31,5 +31,6 @@ public:
                 ans = max(ans, curCount * it->first);
             }
         }
+        return ans;
     }
 };

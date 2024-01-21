@@ -25,6 +25,21 @@ public:
         int exc = mem(nums, n - 1, dp);
         return dp[n] = max(inc, exc);
     }
+    int tab(vector<int> &nums, int n)
+    {
+        vector<int> dp(n + 1, 0);
+        dp[0] = nums[0];
+        for (int i = 1; i <= n; i++)
+        {
+            int x = 0;
+            if (i - 2 >= 0)
+                x = dp[i - 2];
+            int inc = x + nums[i];
+            int exc = dp[i - 1];
+            dp[i] = max(inc, exc);
+        }
+        return dp[n];
+    }
     int so(vector<int> &nums)
     {
         int n = nums.size();

@@ -66,3 +66,34 @@ public:
         return tab(arr, maxi);
     }
 };
+
+int usingStack(vector<int> &arr){
+    int ans = 0;
+    stack<int> s;
+    for (int x : arr){
+        while (!s.empty() && s.top() <= x){
+            int mini = s.top();
+            s.pop();
+
+            if (!s.empty()){ 
+                ans += mini * min(x, s.top());
+            }
+            else{
+                ans += mini * x;
+            }
+        }
+
+        s.push(x);
+    }
+
+    int y = s.top();
+    s.pop();
+
+    while (!s.empty()){
+        int z = s.top();
+        s.pop();
+        ans += y * z;
+        y = z;
+    }
+    return ans;
+}

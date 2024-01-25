@@ -1,22 +1,89 @@
 class Solution
 {
 public:
-    int longestCommonSubsequence(string text1, string text2)
+    int solve(string &a, string &b, int i, int j)
     {
-        int arr[1001][1001];
-        memset(arr, 0, sizeof(arr));
-        int n1 = text1.size();
-        int n2 = text2.size();
-        for (int i = 1; i <= n1; i++){
-            for (int j = 1; j <= n2; j++){
-                if (text1[i - 1] == text2[j - 1]){
-                    arr[i][j] = 1 + arr[i - 1][j - 1];
+        if (i == a.length() || j == b.length())
+        {
+            return 0;
+        }
+        int ans = 0;
+        if (a[i] == b[j])
+        {
+            ans = 1 + solve(a, b, i + 1, j + 1);
+        }
+        else
+        {
+            ans = max(solve(a, b, i + 1, j), solve(a, b, i, j + 1));
+        }
+        return ans;
+    }
+    int mem(string &a, string &b, int i, int j, vector<vector<int>> &dp)
+    {
+        if (i == a.length() || j == b.length())
+        {
+            return 0;
+        }
+        if (dp[i][j] != -1)
+            return dp[i][j];
+        int ans = 0;
+        if (a[i] == b[j])
+        {
+            ans = 1 + mem(a, b, i + 1, j + 1, dp);
+        }
+        else
+        {
+            ans = max(mem(a, b, i + 1, j, dp), mem(a, b, i, j + 1, dp));
+        }
+        return dp[i][j] = ans;
+    }
+    int tab(string &a, string &b)
+    {
+        vector<vector<int>> dp(a.length() + 1, vector<int>(b.length() + 1, 0));
+        for (int i = a.length() - 1; i >= 0; i--)
+        {
+            for (int j = b.length() - 1; j >= 0; j--)
+            {
+                int ans = 0;
+                if (a[i] == b[j])
+                {
+                    ans = 1 + dp[i + 1][j + 1];
                 }
-                else{
-                    arr[i][j] = max(arr[i - 1][j], arr[i][j - 1]);
+                else
+                {
+                    ans = max(dp[i + 1][j], dp[i][j + 1]);
                 }
+                dp[i][j] = ans;
             }
         }
-        return arr[n1][n2];
+        return dp[0][0];
+    }
+    int so(string &a, string &b)
+    {
+        vector<int> curr(b.length() + 1, 0);
+        vector<int> next(b.length() + 1, 0);
+        for (int i = a.length() - 1; i >= 0; i--)
+        {
+            for (int j = b.length() - 1; j >= 0; j--)
+            {
+                int ans = 0;
+                if (a[i] == b[j])
+                {
+                    ans = 1 + next[j + 1];
+                }
+                else
+                {
+                    ans = max(next[j], curr[j + 1]);
+                }
+                curr[j] = ans;
+            }
+            next = curr;
+        }
+        return next[0];
+    }
+    int longestCommonSubsequence(string text1, string text2)
+    {
+
+        return so(text1, text2);
     }
 };

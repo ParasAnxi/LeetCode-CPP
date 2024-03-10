@@ -15,3 +15,25 @@ public:
         return ans;
     }
 };
+class Solution
+{
+public:
+    vector<int> intersection(vector<int> &nums1, vector<int> &nums2)
+    {
+        unordered_map<int, bool> visited;
+        for (auto num : nums1)
+        {
+            visited[num] = true;
+        }
+        vector<int> ans;
+        for (auto num : nums2)
+        {
+            if (visited[num])
+            {
+                ans.push_back(num);
+                visited[num] = false;
+            }
+        }
+        return ans;
+    }
+};

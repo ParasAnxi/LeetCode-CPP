@@ -33,3 +33,41 @@ public:
         return w;
     }
 };
+class Solution
+{
+public:
+    int findMaximizedCapital(int k, int w, vector<int> &profits, vector<int> &capital)
+    {
+
+        vector<pair<int, int>> v;
+        for (int i = 0; i < capital.size(); i++)
+        {
+            v.push_back({profits[i], capital[i]});
+        }
+        sort(v.begin(), v.end(), [](const auto &a, const auto &b)
+             {
+            if (a.second < b.second) return true;
+            if (a.second == b.second) return a.first < b.first;
+            return false; });
+        priority_queue<pair<int, int>> pq;
+        for (int i = 0; (i < v.size()) && (k > 0); i++)
+        {
+            while (w < v[i].second && k > 0 && !pq.empty())
+            {
+                w += pq.top().first;
+                pq.pop();
+                k--;
+            }
+            if (w < v[i].second)
+                break;
+            pq.push(v[i]);
+        }
+        while (k > 0 && !pq.empty())
+        {
+            w += pq.top().first;
+            k--;
+            pq.pop();
+        }
+        return w;
+    }
+};

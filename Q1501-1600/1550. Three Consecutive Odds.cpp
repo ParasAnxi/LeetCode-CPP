@@ -21,7 +21,7 @@ public:
         {
             int sum = 0;
             sum = arr[i] + arr[i + 1] + arr[i + 2];
-            if (sum == 3)
+            if (sum == 3) 
             {
                 return true;
             }

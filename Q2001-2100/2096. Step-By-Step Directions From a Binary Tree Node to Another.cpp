@@ -16,7 +16,7 @@ public:
     {
         queue<TreeNode *> q;
         q.push(root);
-        TreeNode *node = NULL;
+        TreeNode *first = NULL;
 
         while (!q.empty())
         {
@@ -25,7 +25,7 @@ public:
 
             if (curr->val == startValue)
             {
-                node = curr;
+                first = curr;
                 break;
             }
 
@@ -39,7 +39,7 @@ public:
             }
         }
 
-        unordered_map<int, TreeNode *> parent;
+        unordered_map<int, TreeNode *> parents;
         q.push(root);
 
         while (!q.empty())
@@ -49,19 +49,19 @@ public:
 
             if (curr->left)
             {
-                parent[curr->left->val] = curr;
+                parents[curr->left->val] = curr;
                 q.push(curr->left);
             }
             if (curr->right)
             {
-                parent[curr->right->val] = curr;
+                parents[curr->right->val] = curr;
                 q.push(curr->right);
             }
         }
 
         unordered_set<TreeNode *> visited;
-        q.push(node);
-        unordered_map<TreeNode *, pair<TreeNode *, char>> vis;
+        q.push(first);
+        unordered_map<TreeNode *, pair<TreeNode *, char>> path;
 
         TreeNode *des = NULL;
 
@@ -77,33 +77,33 @@ public:
                 break;
             }
 
-            if (parent.find(curr->val) != parent.end() && visited.find(parent[curr->val]) == visited.end())
+            if (parents.find(curr->val) != parents.end() && visited.find(parents[curr->val]) == visited.end())
             {
-                TreeNode *parent = parent[curr->val];
+                TreeNode *parent = parents[curr->val];
                 q.push(parent);
-                vis[parent] = make_pair(curr, 'U');
+                path[parent] = make_pair(curr, 'U');
             }
 
             if (curr->left && visited.find(curr->left) == visited.end())
             {
                 q.push(curr->left);
-                vis[curr->left] = make_pair(curr, 'L');
+                path[curr->left] = make_pair(curr, 'L');
             }
 
             if (curr->right && visited.find(curr->right) == visited.end())
             {
                 q.push(curr->right);
-                vis[curr->right] = make_pair(curr, 'R');
+                path[curr->right] = make_pair(curr, 'R');
             }
         }
 
         stack<char> res;
         TreeNode *curr = des;
 
-        while (curr != node)
+        while (curr != first)
         {
-            auto it = vis.find(curr);
-            if (it != vis.end())
+            auto it = path.find(curr);
+            if (it != path.end())
             {
                 res.push(it->second.second);
                 curr = it->second.first;

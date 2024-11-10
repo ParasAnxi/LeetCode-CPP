@@ -1,28 +1,37 @@
 class Solution
 {
 public:
-    int minimumSubarrayLength(vector<int> &nums, int k)
+    int minimumSubarrayLength(vector<int> &v, int k)
     {
-        int n = nums.size(), 
-        int mini = INT_MAX;
-
-        for (int i = 0; i < n; i++)
+        int ans = INT_MAX;
+        int count[30] = {};
+        int val = 0;
+        for (int i = 0, j = 0; i < v.size(); ++i)
         {
-            int orr = 0;
-            for (int j = i; j < n; j++)
+            int x = v[i];
+            for (int l = 0; x; x >>= 1, ++l)
             {
-                orr |= nums[j];
-                if (orr >= k)
+                if (x & 1)
                 {
-                    mini = min(mini, j - i + 1);
-                    break;
+                    count[l]++;
+                    val |= (1 << l);
+                }
+            }
+            while (val >= k && j <= i)
+            {
+                ans = min(ans, i - j + 1);
+                int x = v[j];
+                j++;
+                for (int i = 0; x; x >>= 1, ++i)
+                {
+                    if (x & 1)
+                    {
+                        count[i]--;
+                        (count[i] == 0) && (val &= ~(1 << i));
+                    }
                 }
             }
         }
-
-        if (mini == INT_MAX)
-            return -1;
-        else
-            return mini;
+        return ans == INT_MAX ? -1 : ans;
     }
 };

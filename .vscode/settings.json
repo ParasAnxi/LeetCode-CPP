@@ -68,6 +68,13 @@
         "typeindex": "cpp",
         "typeinfo": "cpp",
         "valarray": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "optional": "cpp",
+        "xhash": "cpp",
+        "xmemory": "cpp",
+        "xtr1common": "cpp",
+        "xutility": "cpp"
     }
 }

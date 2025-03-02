@@ -8,22 +8,22 @@ public:
 
         for (auto &i : nums1)
         {
-            if (!mp[&i[0]])
-                mp[&i[0]] = &i[1];
+            if (!mp[i[0]])
+                mp[i[0]] = i[1];
             else
-                mp[&i[0]] += &i[1];
+                mp[i[0]] += i[1];
         }
         for (auto &i : nums2)
         {
-            if (!mp[&i[0]])
-                mp[&i[0]] = &i[1];
+            if (!mp[i[0]])
+                mp[i[0]] = i[1];
             else
-                mp[&i[0]] += &i[1];
+                mp[i[0]] += i[1];
         }
 
         for (auto &i : mp)
         {
-            ans.push_back({&i.first, &i.second});
+            ans.push_back({i.first, i.second});
         }
         return ans;
     }

@@ -14,7 +14,7 @@ class Solution {
 public:
   pair<TreeNode *, int> solve(TreeNode *root) {
     bool left = false, right = false;
-    pair<TreeNode *, int> l, r;
+    pair<TreeNode *, int> leftAns, rightAns;
 
     if (root->left) {
       leftAns = solve(root->left);

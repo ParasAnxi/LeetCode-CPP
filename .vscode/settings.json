@@ -91,6 +91,8 @@
         "xlocmon": "cpp",
         "xlocnum": "cpp",
         "xloctime": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "ranges": "cpp",
+        "span": "cpp"
     }
 }

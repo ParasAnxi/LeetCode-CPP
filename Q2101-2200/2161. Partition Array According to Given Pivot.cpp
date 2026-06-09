@@ -1,23 +1,48 @@
-class Solution
-{
+using ll = long long;
+using ull = unsigned long long;
+using ld = long double;
+using cd = complex<double>;
+using pii = pair<int, int>;
+using psi = pair<string, int>;
+using pll = pair<ll, ll>;
+using ppii = pair<int, pii>;
+using vi = vector<int>;
+using vd = vector<double>;
+using vvi = vector<vi>;
+using vvvi = vector<vvi>;
+using vll = vector<ll>;
+using vvll = vector<vll>;
+using vc = vector<char>;
+using vpii = vector<pii>;
+using vpll = vector<pll>;
+using pis = pair<int, string>;
+using vs = vector<string>;
+using mii = map<int, int>;
+using mll = map<ll, ll>;
+using pli = pair<ll, int>;
+using umii = unordered_map<int, int>;
+using umcvi = unordered_map<char, vi>;
+using umsi = unordered_map<string, int>;
+using mivi = map<int, vi>;
+using umci = unordered_map<char, int>;
+#define pb push_back
+#define MOD 1000000007
+#define LMOD 1000000000000000007LL
+class Solution {
 public:
-    vector<int> pivotArray(vector<int> &nums, int pivot)
-    {
-        vector<int> small, equal, large;
-
-        for (int i : nums)
-        {
-            if (i < pivot)
-                small.push_back(i);
-            else if (i == pivot)
-                equal.push_back(i);
-            else
-                large.push_back(i);
-        }
-
-        small.insert(small.end(), equal.begin(), equal.end());
-        small.insert(small.end(), large.begin(), large.end());
-
-        return small;
+  vector<int> pivotArray(vector<int> &nums, int pivot) {
+    vi vS, vE, vL;
+    for (auto i : nums) {
+      if (i < pivot) {
+        vS.pb(i);
+      } else if (i == pivot) {
+        vE.pb(i);
+      } else {
+        vL.pb(i);
+      }
     }
+    vS.insert(vS.end(), vE.begin(), vE.end());
+    vS.insert(vS.end(), vL.begin(), vL.end());
+    return vS;
+  }
 };
